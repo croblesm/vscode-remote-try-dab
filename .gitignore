@@ -6,7 +6,7 @@ project.lock.json
 nupkg/
 
 # User-specific files
-!database/Library/bin/Debug
+!/database/Library/bin/Debug/*
 
 # Visual Studio Code
 #.vscode/

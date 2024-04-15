@@ -46,15 +46,27 @@ This template creates two containers, one for the Dev Container that includes .N
 
 The SQL container is deployed from the latest developer edition of Microsoft SQL 2022. The database(s) are made available directly in the Codespace/VS Code through the MSSQL extension with a connection labeled "LocalDev".  The default `sa` user password is set to `P@ssw0rd!`. The default SQL port is mapped to port `1433` in `.devcontainer/docker-compose.yml`.
 
-Data API builder is a .NET Core application that provides a RESTful API for interacting with the SQL server.  
+Data API builder is a .NET Core application that provides a RESTful API for interacting with the SQL server. This sample repository includes a preconfigured database, that is used by DAB to create the REST and GraphQL endpoints. If you wan to run some manual tests, you can use the  `dab_http_request.sh` file included in the `scripts`folder. This `sh` file includes multiple http request calls you can to understand how the Data API builder to interact with the SQL server.
 
-Data API builder automatically starts and connects to a database titled "Library", that includes sample data. In case stopped this Dev Container and you want to manually start Data API Builder you can use the following commands:
+#### VS Code Tasks
 
-```bash
-cd DAB-Config && dab start --config=dab.config.json
-```
+We have added several tasks to this repository to help with common actions. You can access these tasks by opening the Command Palette in VS Code. Here's how:
 
-The `dab_http_request.sh` file includes multiple examples of how to use the Data API builder to interact with the SQL server.
+1. Press <kbd>F1</kbd> or <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> to open the Command Palette.
+2. Type "Run Task" and select "Tasks: Run Task".
+3. Choose the task you want to run from the list.
+
+##### Run DAB
+
+This task starts the DAB server with the specified configuration file. It runs the command `dab start --config=dab.config.json --no-https-redirect` in the `dab` directory of your workspace.
+
+##### Build SQL Database project
+
+This task builds the SQL Database project. It runs the command `dotnet build` in the `database/Library` directory of your workspace.
+
+##### Execute SQL Query
+
+This task opens the `verifyDatabase.sql` file in your workspace and executes the SQL query in it. It uses the `ms-mssql.mssql` extension to execute the query. This task is part of the build group and is the default task that runs when you run the build task group.
 
 #### Changing the sa password
 
@@ -64,7 +76,9 @@ To change the `sa` user password, change the value in `.devcontainer/docker-comp
 
 By default, a  demo database is created titled "Library".  To add additional database objects or data through T-SQL during Codespace configuration, edit the file `.devcontainer/sql/library.azure-sql.sql` or place additional `.sql` files in the `.devcontainer/mssql/` folder. *Large numbers of scripts may take a few minutes following container creation to complete, even when the SQL server is available the database(s) may not be available yet.*
 
-Alternatively, .dacpac files placed in the `./bin/Debug` folder will be published as databases in the container during Codespace configuration. [SqlPackage](https://docs.microsoft.com/sql/tools/sqlpackage) is used to deploy a database schema from a data-tier application file (dacpac), allowing you to bring your application's database structures into the dev container easily. *The publish process may take a few minutes following container creation to complete, even when the server is available the database(s) may not be available yet.*
+You can also the SQL Database Projects extension to deploy the database schema. The `Library.sqlproj` project is located in the `database/Library` folder can be build using the `Build SQL Database project` task. The `verifyDatabase.sql` file in the `database/Library` folder can be used to verify the database schema.
+
+Alternatively, .dacpac files placed in the `./bin/Debug` folder will be published as databases in the container during Dev Container configuration. [SqlPackage](https://docs.microsoft.com/sql/tools/sqlpackage) is used to deploy a database schema from a data-tier application file (dacpac), allowing you to bring your application's database structures into the dev container easily. *The publish process may take a few minutes following container creation to complete, even when the server is available the database(s) may not be available yet.*
 
 ### Adding another service
 
