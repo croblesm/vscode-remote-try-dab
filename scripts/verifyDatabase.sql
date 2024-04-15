@@ -1,5 +1,7 @@
 -- Verifying database
-select * from library.dbo.authors;
-GO
-select * from library.dbo.books;
-GO
+use library;
+go
+select * from dbo.authors;
+go
+select * from dbo.books;
+go
