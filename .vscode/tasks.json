@@ -4,22 +4,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run DAB",
-            "type": "shell",
-            "command": "dab start --config=dab.config.json --no-https-redirect",
-            "options": {
-                "cwd": "${workspaceFolder}/dab"
-            }
-        },
-        {
-            "label": "Build SQL Database project",
-            "type": "shell",
-            "command": "dotnet build",
-            "options": {
-                "cwd": "${workspaceFolder}/database/Library"
-            }
-        },
-        {
             "label": "Execute SQL Query",
             "type": "shell",
             "command": "code",
@@ -31,6 +15,32 @@
                 "reveal": "always",
                 "panel": "new"
             }
+        },
+        {
+            "label": "Build SQL Database project",
+            "type": "shell",
+            "command": "dotnet build",
+            "options": {
+                "cwd": "${workspaceFolder}/database/Library"
+            }
+        },
+        {
+            "label": "Deploy SQL Database project",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                ".devcontainer/sql/postCreateCommand.sh",
+                "database/Library/bin/Debug"
+            ]
+        },
+        {
+            "label": "Run DAB",
+            "type": "shell",
+            "command": "dab start --config=dab.config.json --no-https-redirect",
+            "options": {
+                "cwd": "${workspaceFolder}/dab"
+            }
         }
+
     ]
 }
