@@ -8,7 +8,6 @@ This is a sample project that lets you try out either option in a few easy steps
 
 > **Note:** If you already have a Codespace or dev container, you can jump to the [About this](#about-this-template) section.
 
-
 ## Setting up the development container
 
 ### GitHub Codespaces
@@ -46,7 +45,9 @@ This template creates two containers, one for the Dev Container that includes .N
 
 The SQL container is deployed from the latest developer edition of Microsoft SQL 2022. The database(s) are made available directly in the Codespace/VS Code through the MSSQL extension with a connection labeled "LocalDev". The default `sa` user password is set using the .devcontainer/.env file. The default SQL port is mapped to port `1433` in `.devcontainer/docker-compose.yml`.
 
-Data API builder is a .NET Core application that provides a RESTful API for interacting with the SQL server. This sample repository includes a preconfigured database, that is used by DAB to create the REST and GraphQL endpoints. If you wan to run some manual tests, you can use the  `dab_http_request.sh` file included in the `scripts`folder. This `sh` file includes multiple http request calls you can to understand how the Data API builder to interact with the SQL server.
+Data API builder is a .NET Core application that provides a RESTful API for interacting with the SQL Server. This sample repository includes a preconfigured database, that is used by DAB to create the REST and GraphQL endpoints. Swagger UI offers a web-based UI that provides information about the REST endpoint, using the generated OpenAPI specification available at the default path: `http://localhost:5000/swagger/index.html`. Entities configured to be available via GraphQL are available at the default path: `http://localhost:5000/graphql`. 
+
+If you wan to run some manual tests, you can use the  `dab_http_request.sh` file included in the `scripts`folder. This `sh` file includes multiple http request calls you can to understand how the Data API builder to interact with the SQL server.
 
 > **Note:**
 While the SQL Server container employs a standard version of SQL Server, all database development within this Dev Container can be validated for Azure SQL Database using the SQL Database Project. The SQL Database project is preconfigured with the target platform set as Azure SQL Database.
@@ -59,17 +60,17 @@ We have added several tasks to this repository to help with common actions. You 
 2. Type "Run Task" and select "Tasks: Run Task".
 3. Choose the task you want to run from the list.
 
-#### Execute SQL Query
+#### Execute SQL Query (Verify database)
 
 This task opens the `verifyDatabase.sql` file in your workspace and executes the SQL query in it. It uses the `ms-mssql.mssql` extension to execute the query. This task is part of the build group and is the default task that runs when you run the build task group.
 
-#### Build SQL Database project
+#### Build SQL Database project (Optional)
 
 This task builds the SQL Database project. It runs the command `dotnet build` in the `database/Library` directory of your workspace.
 
 This task is optional, but it is useful to verify the database schema. You can use this SQL Database project to make changes to the database schema and deploy it to the SQL Server container.
 
-#### Deploy SQL Database Project
+#### Deploy SQL Database Project (Optional)
 
 This task involves deploying the SQL Database project to your SQL Server container. It executes the `postCreateCommand.sh` script found in the `.devcontainer/sql` directory of your workspace.
 
@@ -77,7 +78,13 @@ The `postCreateCommand.sh` script requires one argument: the path to the directo
 
 It utilizes the sqlpackage command-line utility to update the database schema using the .dacpac file, employing authentication credentials from the `.env` file situated in the `.devcontainer` directory.
 
-### Changing the sa password
+#### Start Data API Builder (DAB) engine
+
+This task starts the DAB engine using the configuration file located at `dab/dab.config.json`. It executes the command `dab start --config=dab.config.json --no-https-redirect` within the dab directory of your workspace.
+
+> **Note:** Remember to check the Swagger and GraphQL endpoints after starting the DAB engine.
+
+### Changing the SA password
 
 To adjust the sa password, you need to modify the `.env` file located within the `.devcontainer` directory. This password is crucial for the creation of the SQL Server container and the deployment of the Library database using the `database/Library/bin/Debug/Library.dacpac` file.
 
