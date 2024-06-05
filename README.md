@@ -1,3 +1,19 @@
+---
+page_type: sample
+languages:
+- sql
+- tsql
+- dockerfile
+- data-api-builder
+products:
+- azure
+- azure-sql-database
+urlFragment: devcontainer
+name: Sample devcontainer for Data API builder and Azure SQL Database
+description: Try out Data API builder (DAB) using a sample application within a devcontainer. This sample application is designed to connect to Azure SQL Database.
+---
+<!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+
 # Try Out Development Containers: Data API builder & Azure SQL Database
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/microsoft/vscode-remote-try-dab/tree/main)
