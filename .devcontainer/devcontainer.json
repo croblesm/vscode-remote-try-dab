@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. 
 // For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/dotnet-mssql
 {
-	"name": "Data API builder and SQL Server",
+	"name": "Data API builder and Azure SQL Database",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/workspace",
@@ -24,7 +24,7 @@
 						"trustServerCertificate": true
 					}
 				],
-				"sqlDatabaseProjects.dotnetSDK Location": "/usr/share/dotnet/sdk/6.0.414"
+				"sqlDatabaseProjects.dotnetSDK Location": "/usr/share/dotnet/sdk/"
 			},
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [

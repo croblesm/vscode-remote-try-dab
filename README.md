@@ -59,11 +59,13 @@ Follow these steps to open this sample in a container using the VS Code Dev Cont
 
 This template creates two containers, one for the Dev Container that includes .NET and Data API builder and one for Microsoft SQL Server. You will be connected to the Ubuntu, and from within that container the MS SQL container will be available on **`localhost`** port 1433. The Data API builder container also includes supporting scripts in the `.devcontainer/sql` folder used to configure the `Library` sample database.  
 
+![DevContainers-AzureSQL](DAB-DevContainers-AzureSQL.png)
+
 The SQL container is deployed from the latest developer edition of Microsoft SQL 2022. The database(s) are made available directly in the Codespace/VS Code through the MSSQL extension with a connection labeled "LocalDev". The default `sa` user password is set using the .devcontainer/.env file. The default SQL port is mapped to port `1433` in `.devcontainer/docker-compose.yml`.
 
-Data API builder is a .NET Core application that provides a RESTful API for interacting with the SQL Server. This sample repository includes a preconfigured database, that is used by DAB to create the REST and GraphQL endpoints. Swagger UI offers a web-based UI that provides information about the REST endpoint, using the generated OpenAPI specification available at the default path: `http://localhost:5000/swagger/index.html`. Entities configured to be available via GraphQL are available at the default path: `http://localhost:5000/graphql`. 
+Data API builder is a .NET Core application that provides a RESTful API for interacting with the database. This sample repository includes a preconfigured database, that is used by DAB to create the REST and GraphQL endpoints. Swagger UI offers a web-based UI that provides information about the REST endpoint, using the generated OpenAPI specification available at the default path: `http://localhost:5000/swagger/index.html`. Entities configured to be available via GraphQL are available at the default path: `http://localhost:5000/graphql`.
 
-If you wan to run some manual tests, you can use the  `dab_http_request.sh` file included in the `scripts`folder. This `sh` file includes multiple http request calls you can to understand how the Data API builder to interact with the SQL server.
+If you wan to run some manual tests, you can use the  `dab_http_request.sh` file included in the `scripts`folder. This `sh` file includes multiple http request calls you can to understand how the Data API builder to interact with the database.
 
 > **Note:**
 While the SQL Server container employs a standard version of SQL Server, all database development within this Dev Container can be validated for Azure SQL Database using the SQL Database Project. The SQL Database project is preconfigured with the target platform set as Azure SQL Database.

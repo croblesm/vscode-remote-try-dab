@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        # Update 'VARIANT' to pick a version of .NET: 6.0-focal, 7.0-bullseye
-        VARIANT: "6.0-focal"
+        # Update 'VARIANT' to pick a version of .NET: 8.0-bookworm
+        VARIANT: "8.0-bookworm"
 
     volumes:
       - ..:/workspace:cached
